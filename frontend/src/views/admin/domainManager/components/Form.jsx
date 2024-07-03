@@ -1,5 +1,8 @@
 import { React, useState } from "react";
+
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function Form() {
   const form = useForm();
@@ -7,9 +10,32 @@ function Form() {
   const { errors } = formState;
   const [submittedData, setSubmittedData] = useState(null);
 
-  const onSubmit = (data) => {
-    console.log(data);
-    setSubmittedData(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/domain-manager",
+        data
+      );
+      console.log(response.data.message);
+      Swal.fire({
+        title: response.data.message,
+        text: "Thank you !!",
+        icon:"success"
+      });
+      console.log(data)
+      setSubmittedData(data);
+
+      console.log("Developer added !!");
+
+    } catch (error) {
+      console.log("Error : ", error.response?.message );
+      Swal.fire({
+        title: "Domain registered already!!",
+        text:"Thank you",
+        icon: "error"
+      })
+      
+    }
   };
   return (
     <>
@@ -28,7 +54,7 @@ function Form() {
                 <input
                   type="text"
                   id="domain"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
                     "domain",
 
@@ -38,10 +64,11 @@ function Form() {
                         value: true,
                         message: "This field can't be empty",
                       },
-                      pattern:{
-                        value: /^(?=.{1,253}$)((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,63}$/,
+                      pattern: {
+                        value:
+                          /^(?=.{1,253}$)((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,63}$/,
                         message: "Invalid domain format!!",
-                      }
+                      },
                     }
                   )}
                 />
@@ -50,58 +77,58 @@ function Form() {
 
               {/* Registration Date input field  */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="registration_Date">Registration Date </label>
+                <label htmlFor="registrationdate">Registration Date </label>
                 <input
-                  type="date"
-                  id="registration_Date"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  type="datetime-local"
+                  id="registrationdate"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "registration_Date",
+                    "registrationdate",
                     //validation
-                    {
-                      required: {
-                        value: true,
-                        message: "Select registration date ",
-                      },
-                    }
+                    // {
+                    //   required: {
+                    //     value: true,
+                    //     message: "Select registration date ",
+                    //   },
+                    // }
                   )}
                 />
                 <p className="text-sm text-red-500">
-                  {errors.registration_Date?.message}
+                  {errors.registrationdate?.message}
                 </p>
               </div>
               {/* Last Updated date   */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="update_Date">Updated On</label>
+                <label htmlFor="updateddate">Updated On</label>
                 <input
-                  type="date"
-                  id="update_Date"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  type="datetime-local"
+                  id="updateddate"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "update_Date",
+                    "updateddate",
                     //validation
-                    {
-                      required: {
-                        value: true,
-                        message: "Select last updated date ",
-                      },
-                    }
+                    // {
+                    //   required: {
+                    //     value: true,
+                    //     message: "Select last updated date ",
+                    //   },
+                    // }
                   )}
                 />
                 <p className="text-sm text-red-500">
-                  {errors.update_Date?.message}
+                  {errors.updateddate?.message}
                 </p>
               </div>
               {/* Input field for Taken time to develop web-application */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="time_Taken">Time taken to developed</label>
+                <label htmlFor="takentime">Time taken to developed</label>
                 <input
                   type="number"
-                  id="time_Taken"
+                  id="takentime"
                   placeholder="In days"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "time_Taken",
+                    "takentime",
                     //validation
                     {
                       required: {
@@ -112,7 +139,7 @@ function Form() {
                   )}
                 />
                 <p className="text-sm text-red-500">
-                  {errors.time_Taken?.message}
+                  {errors.takentime?.message}
                 </p>
               </div>
             </div>
@@ -120,52 +147,53 @@ function Form() {
             <div className="mt-5 flex flex-col gap-8 md:mt-0 md:w-1/2">
               {/* Input field for IP Address */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="ip_Address">IP Address</label>
+                <label htmlFor="ipaddress">IP Address</label>
                 <input
                   type="text"
-                  id="ip_Address"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  id="ipaddress"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "ip_Address",
+                    "ipaddress",
                     //validation
                     {
                       required: {
                         value: true,
                         message: "Enter IP address ",
                       },
-                      pattern:{
-                        value: /^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}$/,
-                        message: "Invalid IP address!!"
-                      }
+                      pattern: {
+                        value:
+                          /^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}$/,
+                        message: "Invalid IP address!!",
+                      },
                     }
                   )}
                 />
                 <p className="text-sm text-red-500">
-                  {errors.ip_Address?.message}
+                  {errors.ipaddress?.message}
                 </p>
               </div>
 
               {/* Input field for when will domain expire */}
 
               <div className="flex flex-col gap-2">
-                <label htmlFor="expiry_Date">Expires On</label>
+                <label htmlFor="expirydate">Expires On</label>
                 <input
-                  type="date"
-                  id="expiry_Date"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  type="datetime-local"
+                  id="expirydate"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "expiry_Date",
+                    "expirydate",
                     //validation
-                    {
-                      required: {
-                        value: true,
-                        message: "Select expiry date ",
-                      },
-                    }
+                    // {
+                    //   required: {
+                    //     value: true,
+                    //     message: "Select expiry date ",
+                    //   },
+                    // }
                   )}
                 />
                 <p className="text-sm text-red-500">
-                  {errors.expiry_Date?.message}
+                  {errors.expirydate?.message}
                 </p>
               </div>
               {/* Registrar input field */}
@@ -175,7 +203,7 @@ function Form() {
                   type="text"
                   id="registrar"
                   defaultValue="National Informatics Centre"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
                     "registrar",
                     //validation
@@ -202,7 +230,7 @@ function Form() {
                 <input
                   type="text"
                   id="department"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
                     "department",
                     //validation
@@ -240,13 +268,13 @@ function Form() {
             <div className="flex flex-col gap-8 md:w-1/2  ">
               {/* input field for manager name  */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="manager_Name">Fullname</label>
+                <label htmlFor="fullname">Fullname</label>
                 <input
                   type="text"
-                  id="manager_Name"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  id="fullname"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "manager_Name",
+                    "fullname",
                     //validation
                     {
                       required: {
@@ -261,18 +289,18 @@ function Form() {
                   )}
                 />
                 <p className="text-sm text-red-500">
-                  {errors.manager_Name?.message}
+                  {errors.fullname?.message}
                 </p>
               </div>
               {/* input field for manager Department  */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="manager_Department"> Department </label>
+                <label htmlFor="manager_department"> Department </label>
                 <input
                   type="text"
-                  id="manager_Department"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  id="manager_department"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "manager_Department",
+                    "manager_department",
                     //validation
                     {
                       required: {
@@ -286,33 +314,32 @@ function Form() {
                     }
                   )}
                 />
-                <p>{errors.manager_Department?.message}</p>
+                <p>{errors.manager_department?.message}</p>
               </div>
               {/* input field for manager Phone number  */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="manager_ContactNo"> Contact No.</label>
+                <label htmlFor="contact_no"> Contact No.</label>
                 <input
                   type="text"
-                  id="manager_ContactNo"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  id="contact_no"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "manager_ContactNo",
+                    "contact_no",
                     //validation
                     {
                       required: {
                         value: true,
                         message: "Enter phone number!!  ",
                       },
-                      pattern:{
-                        value: /^((\+91|0091)|0)?[789]\d{9}$/,
-                        message: "Invalid mobile no."
-
-                      }
+                      pattern: {
+                        value: /^((\+91|0091)|0)?[6789]\d{9}$/,
+                        message: "Invalid mobile no.",
+                      },
                     }
                   )}
                 />
                 <p className="text-sm text-red-500">
-                  {errors.manager_ContactNo?.message}
+                  {errors.contact_no?.message}
                 </p>
               </div>
             </div>
@@ -320,13 +347,13 @@ function Form() {
             <div className="flex flex-col gap-8 md:w-1/2  ">
               {/* input field for manager Designation  */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="manager_Designation">Designation</label>
+                <label htmlFor="designation">Designation</label>
                 <input
                   type="text"
-                  id="manager_Designation"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  id="designation"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "manager_Designation",
+                    "designation",
                     //validation
                     {
                       required: {
@@ -337,18 +364,18 @@ function Form() {
                   )}
                 />
                 <p className="text-sm text-red-500">
-                  {errors.manager_Designation?.message}
+                  {errors.designation?.message}
                 </p>
               </div>
               {/* input field for manager Address  */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="manager_Address">Address </label>
+                <label htmlFor="address">Address </label>
                 <input
                   type="text"
-                  id="manager_Address"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  id="address"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "manager_Address",
+                    "address",
                     //validation
                     {
                       required: {
@@ -359,18 +386,18 @@ function Form() {
                   )}
                 />
                 <p className="text-sm text-red-500">
-                  {errors.manager_Address?.message}
+                  {errors.address?.message}
                 </p>
               </div>
               {/* input field for manager Email  */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="manager_Email"> Email</label>
+                <label htmlFor="email"> Email</label>
                 <input
                   type="email"
-                  id="manager_Email"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  id="email"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "manager_Email",
+                    "email",
                     //validation
                     {
                       required: {
@@ -378,20 +405,21 @@ function Form() {
                         message: "This field can't be empty!!",
                       },
                       pattern: {
-                        value: /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/,
+                        value:
+                          /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/,
                         message: "Invalid email!!",
                       },
                     }
                   )}
                 />
                 <p className="text-sm text-red-500">
-                  {errors.manager_Email?.message}
+                  {errors.email?.message}
                 </p>
               </div>
             </div>
           </div>
           <div className="mt-10 ms-20">
-            <button className="text-md rounded-md border bg-blue-600 px-3 py-1 font-medium text-white outline-none hover:bg-blue-500">
+            <button className="text-md rounded-md border bg-blue-600 px-3 py-1 font-medium hover:scale-105 duration-200 ease-in-out text-white outline-none hover:bg-blue-500">
               Submit
             </button>
           </div>
@@ -400,7 +428,7 @@ function Form() {
 
         {submittedData && (
           <div className="mx-10 mt-10 text-navy-700 dark:text-white">
-            <h4 className="mb-4 text-2xl font-bold">Domain & Manager  </h4>
+            <h4 className="mb-4 text-2xl font-bold">Domain & Manager </h4>
             <div className="w-1/2 overflow-x-auto">
               <table className="table-sm table">
                 {/* <thead>

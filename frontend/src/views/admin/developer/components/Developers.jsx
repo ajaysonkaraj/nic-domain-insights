@@ -1,6 +1,8 @@
 import { DevTool } from "@hookform/devtools";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function Developers() {
   const form = useForm();
@@ -8,9 +10,28 @@ function Developers() {
   const { errors } = formState;
   const [submittedData, setSubmittedData] = useState(null);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post( "http://localhost:4000/api/developer",data);
+
+    console.log(response.data.message);
+    Swal.fire({
+      title: response.data.message,
+      text:"Thank you !!",
+      icon:"success"
+
+    })
+
     console.log(data);
     setSubmittedData(data);
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: "Developer already registered !!",
+        text : "Thank you !!",
+        icon: "error"
+      })
+    }
   };
   return (
     <>
@@ -27,13 +48,13 @@ function Developers() {
             <div className="flex flex-col gap-8 md:w-1/2  ">
               {/* developer name */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="Name">Fullname</label>
+                <label htmlFor="fullname">Fullname</label>
                 <input
                   type="text"
-                  id="Name"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  id="fullname"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "Name",
+                    "fullname",
                     // validation
                     {
                       required: {
@@ -50,19 +71,20 @@ function Developers() {
 
                 {/* error message printing */}
                 <p className="text-sm text-red-500">
-                  {errors.Name?.message}
+                  {errors.fullname?.message}
                 </p>
               </div>
 
               {/* Developer department */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="Department"> Department </label>
+                <label htmlFor="department"> Department </label>
                 <input
                   type="text"
-                  id="Department"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  id="department"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
+
                   {...register(
-                    "Department",
+                    "department",
                     // validation
                     {
                       required: {
@@ -78,19 +100,20 @@ function Developers() {
                 />
                 {/* error message printing */}
                 <p className="text-sm text-red-500">
-                  {errors.Department?.message}
+                  {errors.department?.message}
                 </p>
               </div>
 
-              {/* Developer Contact detail */}
+              {/* Developer contact detail */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="Contact"> Contact No.</label>
+                <label htmlFor="contact_no"> Contact No.</label>
                 <input
                   type="text"
-                  id="Contact"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  id="contact_no"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
+
                   {...register(
-                    "Contact",
+                    "contact_no",
                     // validation
                     {
                       required: {
@@ -98,7 +121,7 @@ function Developers() {
                         message: "This field can't be empty!!",
                       },
                       pattern: {
-                        value: /^((\+91|0091)|0)?[789]\d{9}$/,
+                        value: /^((\+91|0091)|0)?[6789]\d{9}$/,
                         message: "Invalid phone number format!!",
                       },
                     }
@@ -106,21 +129,22 @@ function Developers() {
                 />
                 {/* error message printing */}
                 <p className="text-sm text-red-500">
-                  {errors.Contact?.message}
+                  {errors.contact_no?.message}
                 </p>
               </div>
 
-              {/* Developer Experience  */}
+              {/* Developer experience  */}
 
               <div className="flex flex-col gap-2">
-                <label htmlFor="Experience"> Experience </label>
+                <label htmlFor="experience"> Experience (in year) </label>
                 <input
                   type="text"
-                  id="Experience"
+                  id="experience"
                   placeholder="In years"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
+
                   {...register(
-                    "Experience",
+                    "experience",
                     // validation
                     {
                       required: {
@@ -136,7 +160,7 @@ function Developers() {
                 />
                 {/* error message printing */}
                 <p className="text-sm text-red-500">
-                  {errors.Experience?.message}
+                  {errors.experience?.message}
                 </p>
               </div>
 
@@ -146,7 +170,7 @@ function Developers() {
                 <input
                   type="text"
                   id="domain"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
                     "domain",
                     // validation
@@ -168,15 +192,15 @@ function Developers() {
             </div>
             {/* col-2 */}
             <div className="flex flex-col gap-8 md:w-1/2  ">
-              {/* Developer Degignation  */}
+              {/* Developer designation  */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="Degignation">Designation</label>
+                <label htmlFor="designation">Designation</label>
                 <input
                   type="text"
-                  id="Degignation"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  id="designation"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "Degignation",
+                    "designation",
                     // validation
                     {
                       required: {
@@ -192,19 +216,19 @@ function Developers() {
                 />
                 {/* error message printing */}
                 <p className="text-sm text-red-500">
-                  {errors.Degignation?.message}
+                  {errors.designation?.message}
                 </p>
               </div>
 
               {/* Developer Address  */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="Address">Address </label>
+                <label htmlFor="address">Address </label>
                 <input
                   type="text"
-                  id="Address"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400 "
+                  id="address"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "Address",
+                    "address",
                     // validation
                     {
                       required: {
@@ -216,19 +240,19 @@ function Developers() {
                 />
                 {/* error message printing */}
                 <p className="text-sm text-red-500">
-                  {errors.Address?.message}
+                  {errors.address?.message}
                 </p>
               </div>
 
               {/* Developer Email Address  */}
               <div className="flex flex-col gap-2">
-                <label htmlFor="Email"> Email</label>
+                <label htmlFor="email"> Email</label>
                 <input
                   type="email"
-                  id="Email"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  id="email"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "Email",
+                    "email",
                     // validation
                     {
                       required: {
@@ -249,13 +273,13 @@ function Developers() {
                 </p>
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="Technology"> Technology</label>
+                <label htmlFor="technology"> Technology</label>
                 <input
                   type="text"
-                  id="Technology"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  id="technology"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "Technology",
+                    "technology",
                     // validation
                     {
                       required: {
@@ -267,17 +291,17 @@ function Developers() {
                 />
                 {/* error message printing */}
                 <p className="text-sm text-red-500">
-                  {errors.Technology?.message}
+                  {errors.technology?.message}
                 </p>
               </div>
               <div className="flex flex-col gap-2">
-                <label htmlFor="ipAddress">IP Address</label>
+                <label htmlFor="ipaddress">IP Address</label>
                 <input
                   type="text"
-                  id="ipAddress"
-                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-green-400"
+                  id="ipaddress"
+                  className="rounded-md border border-navy-700 px-3 py-1 text-navy-700  outline-none dark:bg-navy-700 dark:border-white dark:text-white"
                   {...register(
-                    "ipAddress",
+                    "ipaddress",
                     // validation
                     {
                       required: {
@@ -293,13 +317,13 @@ function Developers() {
                 />
                 {/* error message printing */}
                 <p className="text-sm text-red-500">
-                  {errors.ipAddress?.message}
+                  {errors.ipaddress?.message}
                 </p>
               </div>
             </div>
           </div>
           <div className="mt-10 ms-20">
-            <button className="text-md rounded-md border bg-blue-600 px-3 py-1 font-medium text-white outline-none hover:bg-blue-500">
+            <button className="text-md rounded-md border hover:scale-105 duration-200 ease-in-out bg-blue-600 px-3 py-1 font-medium text-white outline-none hover:bg-blue-500">
               Submit
             </button>
           </div>

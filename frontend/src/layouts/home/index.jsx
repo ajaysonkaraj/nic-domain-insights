@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import routes from "routes";
-import Footer from "components/footer/Footer";
+
 
 function index() {
   const getRoutes = (routes) => {
@@ -18,7 +18,7 @@ function index() {
   return (
     <>
       <div className=" relative float-right h-full min-h-screen w-full bg-lightPrimary dark:!bg-navy-900">
-        <div className=" mx-[5%] h-screen">
+        <div className=" ">
           <Routes>
             {getRoutes(routes)}
             <Route path="/" element={<Navigate to="/home/home" replace />} />
@@ -26,7 +26,7 @@ function index() {
         </div>
         
       </div>
-      <Footer/>
+      
     </>
   );
 }

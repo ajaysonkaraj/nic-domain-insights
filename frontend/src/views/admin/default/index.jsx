@@ -1,5 +1,5 @@
 import React from 'react'
-import Dashboard from "./components/CheckTable"
+import Dashboard from "./components/Dashboard"
 function index() {
   return (
     <>

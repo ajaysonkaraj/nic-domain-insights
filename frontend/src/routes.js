@@ -6,20 +6,16 @@ import DomainManager from "views/admin/domainManager";
 import Profile from "views/admin/profile";
 import Developer from "views/admin/developer";
 import Home from "views/home/Home.jsx";
-// import Home from "./layouts/home/index.jsx";
 
-// Auth Imports
-// import SignIn from "views/auth/SignIn";
 
 // Icon Imports
 import {
   MdHome,
   MdPerson,
-  // MdLock,
+  // MdDashboard,
   MdDomain,
   MdPeopleAlt 
 } from "react-icons/md";
-// import { layout } from "@chakra-ui/system";
 
 const routes = [
   {
@@ -27,11 +23,13 @@ const routes = [
     path:"home",
     component: <Home/>
   },
+ 
+
   
   {
     name: "Main Dashboard",
     layout: "/admin",
-    path: "default",
+    path: "home",
     icon: <MdHome className="h-6 w-6" />,
     component: <MainDashboard />,
   },
@@ -59,14 +57,9 @@ const routes = [
     icon: <MdPerson className="h-6 w-6" />,
     component: <Profile />,
   },
-  // {
-  //   name: "Sign In",
-  //   layout: "/auth",
-  //   path: "sign-in",
-  //   icon: <MdLock className="h-6 w-6" />,
-  //   component: <SignIn />,
-  // },
-
+ 
+ 
+ 
   
   
 ];

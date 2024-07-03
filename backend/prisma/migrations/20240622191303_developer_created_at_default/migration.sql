@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `developer` MODIFY `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3);
