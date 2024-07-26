@@ -21,8 +21,8 @@ function Dashboard() {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("There was an error fetching the data!", error);
-        setIsLoading(false);
+          console.error("There was an error fetching the data!", error);
+          setIsLoading(false);
       });
   };
 
@@ -152,7 +152,7 @@ const handleDelete = (developerId) => {
       // If no domain manager is found, return a message or handle as needed
       return (
         <div className="mt-3 text-sm text-blueSecondary">
-          There is no record for{" "}
+          There is no record for { " "}
           <span className="text-red-600">{domainName}</span>
         </div>
       );
@@ -161,7 +161,7 @@ const handleDelete = (developerId) => {
     return (
       <>
         <div className="mt-10 grid gap-4 md:grid-cols-2">
-          <div className="gap-4 rounded-lg bg-white shadow-lg dark:bg-navy-700">
+          <div className="gap-4 rounded-lg bg-white shadow-lg dark:bg-navy-700 dark:text-white">
             <div className="my-5 flex justify-center text-xl font-bold">
               Domain
             </div>
@@ -216,7 +216,7 @@ const handleDelete = (developerId) => {
               </table>
             </div>
           </div>
-          <div className="rounded-lg bg-white shadow-xl dark:bg-navy-700">
+          <div className="rounded-lg bg-white shadow-xl dark:bg-navy-700 dark:text-white">
             <div className="my-5 flex justify-center text-xl font-bold">
               Manager
             </div>
@@ -252,12 +252,12 @@ const handleDelete = (developerId) => {
             </div>
           </div>
         </div>
-        <div className="mt-10  rounded-lg bg-white shadow-xl dark:bg-navy-700 dark:text-white">
+        <div className="mt-10 truncate rounded-lg bg-white shadow-xl dark:bg-navy-700 dark:text-white">
           <div className="flex justify-center">
             <span className="mt-5 text-2xl font-bold ">Developers</span>
           </div>
           <div className="p-4">
-            <table className="table-sm w-full table-auto">
+            <table className="table-sm w-full table-auto ">
               <thead>
                 <tr>
                   <th>Full Name</th>

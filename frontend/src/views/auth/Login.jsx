@@ -22,7 +22,7 @@ function Login() {
 
     if (response.data.message === "Login successful !!") {
       localStorage.setItem("token",response.data.token);
-      
+
       Swal.fire({
         title: response.data.message,
         text: "Go to admin dashboard..",
@@ -34,7 +34,7 @@ function Login() {
         // }, 60000);
       })
 
-
+      console.log(response.data);
       console.log("User login successful !!")
     } else {
       Swal.fire({
@@ -43,7 +43,7 @@ function Login() {
         icon: "error",
       });
     }
-    
+
    } catch (error) {
     console.log("Error : " , error.response?.message || error.message)
     Swal.fire({

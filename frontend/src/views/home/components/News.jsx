@@ -5,7 +5,7 @@ function News() {
     <>
     <div className="text-navy-700 dark:text-white"> 
 
-      <div className=" mx-[10%] mt-10">
+      <div className="  mt-10">
         <h1>
           <span className="text-navy-700 font-bold dark:text-white">NEWS</span>
         </h1>
@@ -18,7 +18,7 @@ function News() {
           Asperiores aliquid velit voluptatibus!
         </p>
       </div>
-      <div className="mx-[10%] mt-10  grid gap-4 md:grid-cols-4">
+      <div className=" mt-10  grid gap-4 md:grid-cols-4">
         <div>
           <Card />
         </div>

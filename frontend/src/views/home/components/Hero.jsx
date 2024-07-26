@@ -12,35 +12,36 @@ export default function Hero() {
   var settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 2,
+    slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 3000,
-    autoplaySpeed: 3000,
+    speed: 6000,
+    // autoplaySpeed: 3000,
     cssEase: "linear",
+    
   };
   return (
    
     <div >
-      <div className="slider-container rounded-md">
-        <Slider {...settings}>
+      <div className="slider-container">
+        <Slider {...settings} >
           <div>
-            <img src={c1} alt="" />
+            <img src={c1} alt="" className="h-[20rem] w-full rounded-md"/>
           </div>
           <div>
-            <img src={c2} alt="" />
+            <img src={c2} alt="" className="h-[20rem] w-full rounded-md"/>
           </div>
           <div>
-            <img src={c3} alt="" />
+            <img src={c3} alt="" className="h-[20rem] w-full rounded-md"/>
           </div>
           <div>
-            <img src={c1} alt="" />
+            <img src={c1} alt="" className="h-[20rem] w-full rounded-md"/>
           </div>
           <div>
-            <img src={c2} alt="" />
+            <img src={c2} alt="" className="h-[20rem] w-full rounded-md"/>
           </div>
           <div>
-            <img src={c3} alt="" />
+            <img src={c3} alt="" className="h-[20rem] w-full rounded-md"/>
           </div>
         </Slider>
       </div>
