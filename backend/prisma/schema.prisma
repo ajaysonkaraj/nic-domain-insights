@@ -10,7 +10,9 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  // url      = env("DATABASE_URL")
+
+  url = "mysql://sql12723389:rPJAkg6Q4p@sql12.freemysqlhosting.net:3306/sql12723389"
 }
 
 model User {
