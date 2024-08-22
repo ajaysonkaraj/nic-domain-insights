@@ -21,7 +21,10 @@ function Login() {
     // console.log(response.data.message);
 
     if (response.data.message === "Login successful !!") {
+      
       localStorage.setItem("token",response.data.token);
+      localStorage.setItem("email",response.data.data.email);
+      localStorage.setItem("fullname",response.data.data.fullname);
 
       Swal.fire({
         title: response.data.message,

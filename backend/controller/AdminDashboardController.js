@@ -36,7 +36,3 @@ export const fetchDeveloperAndDomainManager = async (req, res) => {
 
 
 
-
-// Perfrom delete the developer
-
-

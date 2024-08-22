@@ -10,9 +10,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  // url      = env("DATABASE_URL")
-
-  url = "mysql://sql12723389:rPJAkg6Q4p@sql12.freemysqlhosting.net:3306/sql12723389"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -20,6 +18,16 @@ model User {
   fullname   String
   email      String   @unique
   password   String
+  created_at DateTime @default(now())
+  verified  Boolean @default(false)
+  token Token[]
+}
+
+model Token {
+  id Int @id @default(autoincrement())
+  userId  Int @unique 
+  user User @relation(fields: [userId], references: [id])
+  token String 
   created_at DateTime @default(now())
 }
 
@@ -58,3 +66,4 @@ model Developer {
   ipaddress   String
   created_at  DateTime @default(now())
 }
+

@@ -1,4 +1,4 @@
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 function Developers() {
   const form = useForm();
-  const { register, handleSubmit, formState, control } = form;
+  const { register, handleSubmit, formState,/*control */} = form;
   const { errors } = formState;
   const [submittedData, setSubmittedData] = useState(null);
 
@@ -328,7 +328,7 @@ function Developers() {
             </button>
           </div>
         </form>
-        <DevTool control={control} /> {/* for developer convenience */}
+        {/* <DevTool control={control} /> for developer convenience */}
         <hr className="mx-10 mt-10 h-0.5 bg-navy-700" />
         {submittedData && (
           <div className="mx-10 mt-10 text-navy-700 dark:text-white">

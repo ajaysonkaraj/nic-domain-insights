@@ -30,14 +30,14 @@ function Dashboard() {
     setDomainName(e.target.value);
   };
 
+// More Button option for show more details of any developer
   const handleMoreClick = (developer) => {
     setSelectedDeveloper(developer);
     setEditedDeveloper(developer);
     document.getElementById("moreDetail").showModal();
   };
 
-  
-
+  // Edit Button option for edit developer details
   const handleEditChange = (e) => {
     const { name, value } = e.target;
     setEditedDeveloper((prev) => ({
@@ -46,6 +46,7 @@ function Dashboard() {
     }));
   };
 
+  // Save the edited Developer details
   const handleSave = () => {
     axios
       .put(

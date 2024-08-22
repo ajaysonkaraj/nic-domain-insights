@@ -66,7 +66,7 @@ const Navbar = (props) => {
         {/* Login Logout button  */}
         {localStorage.getItem("token") ? (
           <div className="flex ">
-            <div className="px-2 mt-1"> <button><Link to="/admin/default">Admin</Link></button></div>
+            <div className="px-2 mt-1 dark:text-white"> <button><Link to="/admin/default">Admin</Link></button></div>
             <div className=" rounded-full bg-blue-700 py-1 px-3 font-bold text-white duration-200 ease-in-out hover:scale-105 hover:bg-blue-600">
               <Link to="/auth/login">
                 <button onClick={handleLogout}>Loguout</button>

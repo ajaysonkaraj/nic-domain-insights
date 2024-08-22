@@ -18,6 +18,15 @@ const Navbar = (props) => {
     navigate("/home/home");
   };
 
+  // Get name from Local Storage
+
+  let name = localStorage.getItem("fullname");
+
+  function capitalizeFLetter(){
+    name = name[0].toUpperCase() + name.slice(1);
+  }
+  capitalizeFLetter();
+
   return (
     <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
       <div className="ml-[6px]">
@@ -93,7 +102,7 @@ const Navbar = (props) => {
             <img
               className="h-10 w-10 rounded-full"
               src={avatar}
-              alt="Elon Musk"
+              alt="uesr"
             />
           }
           children={
@@ -101,7 +110,7 @@ const Navbar = (props) => {
               <div className="p-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, Ajay
+                    👋 Hey, {name}
                   </p>{" "}
                 </div>
               </div>
